@@ -2,27 +2,31 @@ import { useState } from "react";
 
 export function useDialog({onClose, onSubmit} = {}) {
   const [open, setOpen] = useState(false);
+  const [param, setParam] = useState(null);
 
-  function show() {
+  function show(item) {
     setOpen(true);
+    setParam(item);
   }
 
   function hide() {
     setOpen(false);
+    setParam(null);
   }
 
   function close() {
-    onClose?.()
+    onClose?.(param);
     hide();
   }
 
   function submit() {
-    onSubmit?.();
+    onSubmit?.(param);
     hide();
   }
   
   return {
     open,
+    param,
     show,
     hide,
     close,
