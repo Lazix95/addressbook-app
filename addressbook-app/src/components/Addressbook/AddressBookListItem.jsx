@@ -1,6 +1,11 @@
-export function AddressBookListItem({entry, onDelete}) {
+export function AddressBookListItem({entry, onDelete, onClick}) {
 
-  return <div className={'AddressBookList--row '}>
+  function handleDelete(evt) {
+    evt.stopPropagation();
+    onDelete(entry)
+  }
+  
+  return <div className={'AddressBookList--row '} onClick={() => onClick?.(entry)}>
   <div className={'AddressBookList--column'}>
     <span>{entry.firstName} {entry.lastName}</span>
   </div>
@@ -22,7 +27,7 @@ export function AddressBookListItem({entry, onDelete}) {
   </div>
 
   <div className={'AddressBookList--column'}>
-    <button onClick={() => onDelete(entry)}>❌</button>
+    <button onClick={handleDelete}>❌</button>
   </div>
 </div>
 }
