@@ -1,0 +1,30 @@
+.entery-container {
+  padding-top: 30px;
+  .entery-main-middle {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .entry-field {
+      color: black;
+      display: flex;
+      flex-direction: column;
+      width: 40%;
+      margin: 5px;
+    }
+  }
+  .entry-add-btn,.entry-save-btn {
+    color: black ;
+    width: calc(100% - 20px);
+    height: 50px;
+    margin: 10px;
+  }
+
+  .entry-add-btn {
+    background-color: #b5d7a8;
+  }
+
+  .entry-save-btn {
+    background-color: #a0c5f8;
+  }
+}

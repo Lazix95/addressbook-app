@@ -1,0 +1,30 @@
+.AppDialogWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000079;
+  position: fixed;
+  top: 0;
+
+  .AppDialog {
+   min-width: 300px;
+   min-height: 100px;
+   background-color: white;
+   border-radius: 5px;
+
+
+   .header {
+    padding: 5px 10px;
+    border-bottom: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+
+    .title {
+      color: black;
+    }
+   }
+  }
+}
+

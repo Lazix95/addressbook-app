@@ -1,0 +1,22 @@
+.Header {
+  background-color: $bgcolor;
+  color: black;
+  padding: 24px 12px 16px 12px;
+  width: 100%;
+
+  &-btn-add {
+    margin: 0 10px;
+    color: black;
+    background-color: greenyellow;
+  }
+
+  &-input {
+    width: 30%;
+  }
+
+  &-btn-settings {
+    margin: 0 10px;
+    color: black;
+    background-color: yellow;
+  }
+}
