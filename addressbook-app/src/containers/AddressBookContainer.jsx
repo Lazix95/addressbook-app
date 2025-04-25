@@ -5,8 +5,11 @@ import { useAddressbookApi } from "../hooks/api/useAddressbookApi";
 import { useDialog } from "../hooks/useDialog";
 
 // Napraviti View Entity Modal;
-// U njemu prikazati 
-
+// U njemu prikazati sve informacije koje entry sadrzi;
+// Ispod infoirmacija napraviti 2 dugmeta: "Delete" i "Edit"
+// Na klik bilo kojeg dugmeta modal se zatvara i pokrece se "handleDeleteItem" ili "handleEditItem"
+// Stilizovati modal najbvolje sto mozete.
+ 
 export function AddressBookContainer() {
   const {getEntries, addNewEntry, entries} = useAddressbookApi();
   const newEntryDialog = useDialog();
