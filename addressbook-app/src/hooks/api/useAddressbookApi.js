@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { getAddressbookEntriesApi, postAddressbookEntriesApi } from "../../api/addressbookApi";
+import { getAddressbookEntriesApi, postAddressbookEntriesApi, putAddressbookEntriesApi } from "../../api/addressbookApi";
 
 export function useAddressbookApi() {
   const [entries, setEntires] = useState(null);
@@ -10,13 +10,24 @@ export function useAddressbookApi() {
   }
 
   async function addNewEntry(payload) {
-    const data = await postAddressbookEntriesApi(payload)
+    const data = await postAddressbookEntriesApi(payload);
     setEntires((oldEntries) => [...oldEntries, data]);
+  }
+
+  async function editEntry(entry, payload) {
+    const data = await putAddressbookEntriesApi(entry.uuid, payload);
+    setEntires((oldEntries) => {
+      return oldEntries.map((oldEntry) => {
+        if (entry.uuid === oldEntry.uuid) return data;
+        return oldEntry;
+      })
+    });
   }
 
   return {
     entries,
     getEntries,
-    addNewEntry
-  }
+    addNewEntry,
+    editEntry
+    }
 }

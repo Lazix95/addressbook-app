@@ -11,9 +11,10 @@ import { useDialog } from "../hooks/useDialog";
 // Stilizovati modal najbvolje sto mozete.
  
 export function AddressBookContainer() {
-  const {getEntries, addNewEntry, entries} = useAddressbookApi();
+  const {getEntries, addNewEntry, editEntry, entries} = useAddressbookApi();
   const newEntryDialog = useDialog();
   const deleteDialog = useDialog({onSubmit: handleDeleteSubmit});
+  const editDialog = useDialog();
 
   useHeaderBtns({
     leftBtn: {
@@ -45,8 +46,7 @@ export function AddressBookContainer() {
   }
 
   function handleEditItem(item) {
-    // Ovo treba da se loguje kad se klikne ne edit dugme ( bilo iz tabele ili iz "informatikon modala");
-    console.log('editItem: ', item);
+    editDialog.show(item);
   }
 
 
@@ -55,7 +55,13 @@ export function AddressBookContainer() {
   }
 
   function handleDeleteSubmit(item) {
-    console.log('submitted Item', item)
+    console.log('submitted Item', item);
+  }
+
+  async function handleEditSubmit(item, payload) {
+   // console.log('submitted Edit Item', item, payload);
+    await editEntry(item, payload);
+    editDialog.hide();
   }
 
   function handleItemClick(item) {
@@ -68,7 +74,10 @@ export function AddressBookContainer() {
     entries={entries} 
     onNewEntryFormSubmit={handleNewEntrySubmit}
     deleteEntryDialog={deleteDialog}
+    editEntryDialog={editDialog}
     onItemClick={handleItemClick}
+    onEditItem={handleEditItem}
     onDeleteItem={handleDeleteItem}
+    onEditItemSubmit={handleEditSubmit}
   />
 }

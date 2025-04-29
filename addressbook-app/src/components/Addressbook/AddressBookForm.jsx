@@ -1,11 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import classes from './AddressBookForm.module.scss'
 
-export function AddressBookForm({onSubmit}) {
+export function AddressBookForm({onSubmit, item, translations}) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [county, setCounty] = useState('');
   const [city, setCity] = useState('');
+
+  useEffect(() => {
+   if (item) {
+    setFirstName(item.firstName ?? '');
+    setLastName(item.lastName ?? '');
+    setCounty(item.country ?? '');
+    setCity(item.city ?? '')
+   }
+  }, [item])
 
   function handleChange(evt) {
     const fncMap = {
@@ -20,7 +29,7 @@ export function AddressBookForm({onSubmit}) {
     onSubmit({firstName, lastName, country: county, city})
   }
 
-  return <form className={classes['entery-container']}>
+  return <form className={classes['entery-container']} onSubmit={(evt) => evt.preventDefault()}>
     <div className={classes['entery-main-middle']}>
       <div className={classes['entry-field']}>
         <label>First Name</label>
@@ -40,7 +49,7 @@ export function AddressBookForm({onSubmit}) {
       </div>
     </div>
     
-    <button className={classes['entry-add-btn']} onClick={hanldeSubmit}>➕ ADD</button>
+    <button className={classes['entry-add-btn']} onClick={hanldeSubmit}>{translations?.submit}</button>
     
   </form>
 }

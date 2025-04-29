@@ -14,3 +14,8 @@ export async function getAddressbookEntryApi({uuid}) {
   const response = await http.get(`/entries/${uuid}`);
   return response.data;
 }
+
+export async function putAddressbookEntriesApi(uuid, payload) {
+  const response = await http.put(`/entries/${uuid}`, payload);
+  return response.data;
+}
