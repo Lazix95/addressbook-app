@@ -11,7 +11,7 @@ import { useDialog } from "../hooks/useDialog";
 // Stilizovati modal najbvolje sto mozete.
  
 export function AddressBookContainer() {
-  const {getEntries, addNewEntry, editEntry, entries} = useAddressbookApi();
+  const {getEntries, addNewEntry, editEntry, entries, deleteEntry} = useAddressbookApi();
   const newEntryDialog = useDialog();
   const deleteDialog = useDialog({onSubmit: handleDeleteSubmit});
   const editDialog = useDialog();
@@ -56,6 +56,7 @@ export function AddressBookContainer() {
 
   function handleDeleteSubmit(item) {
     console.log('submitted Item', item);
+    deleteEntry(item);
   }
 
   async function handleEditSubmit(item, payload) {
