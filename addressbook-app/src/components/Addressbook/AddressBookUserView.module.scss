@@ -1,0 +1,32 @@
+.AddressBookUserViewModal {
+    color: black;
+
+    p {
+      font-size: small;
+      font-weight: 200;
+    }
+
+    span {
+      font-size: medium;
+      font-weight: 600;
+    }
+
+    section {
+      background-color: rgb(231, 230, 230);
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      border: 1px solid black;
+    }
+
+    button {
+      height: 35px;
+      width: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
