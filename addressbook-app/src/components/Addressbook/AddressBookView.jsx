@@ -3,14 +3,11 @@ import { AppDialog } from "../shared/AppDialog";
 import { AddressBookForm } from "./AddressBookForm";
 import { AddressBookList } from "./AddressBookList";
 import { AddressBookDeleteModal } from './AddressBookDeleteModal';
-import { AddressBookUserViewModal } from './AddressBookUserViewModal';
 
-export function AddressbookView({entries, newEnrtyDialog, deleteEntryDialog, editEntryDialog, onNewEntryFormSubmit, onDeleteItem, onEditItem, onItemClick, onEditItemSubmit, viewEntryDialog, onViewItem}) {
-
- 
+export function AddressbookView({entries, newEnrtyDialog, deleteEntryDialog, editEntryDialog, onNewEntryFormSubmit, onDeleteItem, onEditItem, onItemClick, onEditItemSubmit}) {
 
   return <div className={'AddressBook'}>
-    <AddressBookList entries={entries} onDeleteItem={onDeleteItem} onEditItem={onEditItem} onItemClick={onItemClick} onViewItem={onViewItem}/>
+    <AddressBookList entries={entries} onDeleteItem={onDeleteItem} onEditItem={onEditItem} onItemClick={onItemClick}/>
 
     {createPortal(
       <AppDialog dialog={newEnrtyDialog} title={'Add New Entry'}>
@@ -29,14 +26,5 @@ export function AddressbookView({entries, newEnrtyDialog, deleteEntryDialog, edi
         <AddressBookForm translations={{submit: 'Submit'}}  item={editEntryDialog?.param} onSubmit={(payload) => onEditItemSubmit(editEntryDialog?.param, payload)} />
       </AppDialog>, document.body
     )}
-
-    {createPortal(
-      <AppDialog dialog={viewEntryDialog} title={'View User Inoformation'}>
-        <AddressBookUserViewModal item={viewEntryDialog?.param} onClose={viewEntryDialog.close} openDelete={deleteEntryDialog.show} openEdit={editEntryDialog.show}/>
-      </AppDialog>, document.body
-    )}
   </div>
 }
-
-
-

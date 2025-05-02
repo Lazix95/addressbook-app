@@ -15,7 +15,6 @@ export function AddressBookContainer() {
   const newEntryDialog = useDialog();
   const deleteDialog = useDialog({onSubmit: handleDeleteSubmit});
   const editDialog = useDialog();
-  const viewDialog = useDialog();
 
   useHeaderBtns({
     leftBtn: {
@@ -69,11 +68,6 @@ export function AddressBookContainer() {
     console.log('clicked Item', item);
   }
 
-  function handleViewItem(item) {
-    viewDialog.show(item);
-  }
-
-  
 
   return <AddressbookView 
     newEnrtyDialog={newEntryDialog} 
@@ -81,11 +75,9 @@ export function AddressBookContainer() {
     onNewEntryFormSubmit={handleNewEntrySubmit}
     deleteEntryDialog={deleteDialog}
     editEntryDialog={editDialog}
-    viewEntryDialog={viewDialog}
     onItemClick={handleItemClick}
     onEditItem={handleEditItem}
     onDeleteItem={handleDeleteItem}
     onEditItemSubmit={handleEditSubmit}
-    onViewItem={handleViewItem}
   />
 }

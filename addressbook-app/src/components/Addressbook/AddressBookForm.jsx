@@ -25,7 +25,6 @@ export function AddressBookForm({onSubmit, item, translations}) {
   }
 
 
-  
   function hanldeSubmit() {
     onSubmit({firstName, lastName, country: county, city})
   }
