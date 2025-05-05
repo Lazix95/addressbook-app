@@ -3,6 +3,7 @@ import { AddressbookView } from "../components/Addressbook/AddressBookView";
 import { useHeaderBtns } from "../hooks/useHeaderBtns";
 import { useAddressbookApi } from "../hooks/api/useAddressbookApi";
 import { useDialog } from "../hooks/useDialog";
+import {useHeaderSearch} from "../hooks/useHeaderSearch.js";
 
 // Napraviti View Entity Modal;
 // U njemu prikazati sve informacije koje entry sadrzi;
@@ -11,7 +12,8 @@ import { useDialog } from "../hooks/useDialog";
 // Stilizovati modal najbvolje sto mozete.
  
 export function AddressBookContainer() {
-  const {getEntries, addNewEntry, editEntry, entries, deleteEntry} = useAddressbookApi();
+  const {getEntries, addNewEntry, editEntry, entries, deleteEntry, loadingFlags} = useAddressbookApi();
+  const {search} = useHeaderSearch();
   const newEntryDialog = useDialog();
   const deleteDialog = useDialog({onSubmit: handleDeleteSubmit});
   const editDialog = useDialog();
@@ -29,8 +31,8 @@ export function AddressBookContainer() {
   });
 
   useEffect(() => {
-    getEntries();
-  }, []);
+    getEntries({search});
+  }, [search]);
 
   function handleNew() {
     newEntryDialog.show();
@@ -49,7 +51,6 @@ export function AddressBookContainer() {
   function handleEditItem(item) {
     editDialog.show(item);
   }
-
 
   function handleDeleteItem(item) {
     deleteDialog.show(item);
@@ -78,7 +79,8 @@ export function AddressBookContainer() {
 
   return <AddressbookView 
     newEnrtyDialog={newEntryDialog} 
-    entries={entries} 
+    entries={entries}
+    entriesLoading={loadingFlags.fetching}
     onNewEntryFormSubmit={handleNewEntrySubmit}
     deleteEntryDialog={deleteDialog}
     editEntryDialog={editDialog}

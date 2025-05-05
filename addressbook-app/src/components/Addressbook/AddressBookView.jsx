@@ -5,12 +5,12 @@ import { AddressBookList } from "./AddressBookList";
 import { AddressBookDeleteModal } from './AddressBookDeleteModal';
 import { AddressBookUserViewModal } from './AddressBookUserViewModal';
 
-export function AddressbookView({entries, newEnrtyDialog, deleteEntryDialog, editEntryDialog, onNewEntryFormSubmit, onDeleteItem, onEditItem, onItemClick, onEditItemSubmit, viewEntryDialog, onViewItem}) {
+export function AddressbookView({entries, entriesLoading, newEnrtyDialog, deleteEntryDialog, editEntryDialog, onNewEntryFormSubmit, onDeleteItem, onEditItem, onItemClick, onEditItemSubmit, viewEntryDialog, onViewItem}) {
 
  
 
   return <div className={'AddressBook'}>
-    <AddressBookList entries={entries} onDeleteItem={onDeleteItem} onEditItem={onEditItem} onItemClick={onItemClick} onViewItem={onViewItem}/>
+    <AddressBookList entries={entries} loading={entriesLoading} onDeleteItem={onDeleteItem} onEditItem={onEditItem} onItemClick={onItemClick} onViewItem={onViewItem}/>
 
     {createPortal(
       <AppDialog dialog={newEnrtyDialog} title={'Add New Entry'}>

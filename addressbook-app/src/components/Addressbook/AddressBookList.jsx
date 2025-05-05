@@ -1,10 +1,11 @@
 import { AddressBookListHeader } from "./AddressBookListHeader";
 import { AddressBookListItem } from "./AddressBookListItem";
 
-export function AddressBookList({entries, onDeleteItem, onEditItem, onItemClick, onViewItem}) {
+export function AddressBookList({entries, loading, onDeleteItem, onEditItem, onItemClick, onViewItem}) {
   return <div className={'AddressBookList'}>
     <AddressBookListHeader/>
-    {entries?.map((entry) => <AddressBookListItem key={entry.uuid} entry={entry} onDelete={onDeleteItem} onClick={onItemClick} onEdit={onEditItem} onView={onViewItem}/>)}    
+    {loading ?  <span>Loading...</span> : null}
+    {!loading ? entries?.map((entry) => <AddressBookListItem key={entry.uuid} entry={entry} onDelete={onDeleteItem} onClick={onItemClick} onEdit={onEditItem} onView={onViewItem}/>) : null}
   </div>
 }
 

@@ -1,7 +1,9 @@
 import { http } from "./index";
 
-export async function getAddressbookEntriesApi() {
-  const response = await http.get('/entries');
+export async function getAddressbookEntriesApi({search} = {}) {
+  const searchParam = search ? `search=${search}` : '';
+  await new Promise(resolve => setTimeout(resolve, 800));
+  const response = await http.get(`/entries?${searchParam}`);
   return response.data;
 }
 

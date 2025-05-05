@@ -3,10 +3,24 @@ import { deleteAddressbookEntriesApi, getAddressbookEntriesApi, postAddressbookE
 
 export function useAddressbookApi() {
   const [entries, setEntires] = useState(null);
+  const [loadingFlags, setLoadingFlags] = useState({
+    fetching: false,
+    deleting: false,
+    updating: false,
+  });
 
-  async function getEntries( ) {
-    const data = await getAddressbookEntriesApi();
-    setEntires(data);
+  async function getEntries({search} = {}) {
+    try {
+      setLoadingFlags((oldFlags) => {
+        return {...oldFlags, fetching: true}
+      })
+      const data = await getAddressbookEntriesApi({search});
+      setEntires(data);
+    } finally {
+      setLoadingFlags((oldFlags) => {
+        return {...oldFlags, fetching: false}
+      })
+    }
   }
 
   async function addNewEntry(payload) {
@@ -23,8 +37,9 @@ export function useAddressbookApi() {
       })
     });
   }
+
   async function deleteEntry(entry) {
-    const data = await deleteAddressbookEntriesApi(entry.uuid);
+    await deleteAddressbookEntriesApi(entry.uuid);
     setEntires((oldEntries) => {
       return oldEntries.filter((oldEntry) => oldEntry.uuid !== entry.uuid);
     });
@@ -35,6 +50,7 @@ export function useAddressbookApi() {
     getEntries,
     addNewEntry,
     editEntry,
-    deleteEntry
+    deleteEntry,
+    loadingFlags
     }
 }

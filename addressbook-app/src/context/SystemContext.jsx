@@ -7,6 +7,7 @@ export function SystemContextProvider({children}) {
   // {text: string, handler: () => void}
   const [leftBtn, setLeftBtn ] = useState(null);
   const [righBtn, setRightBtn ] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
   const [isScrollHiden, setIsScrollHidden] = useState(false);
 
   useEffect(() => {
@@ -20,12 +21,16 @@ export function SystemContextProvider({children}) {
   const value = useMemo(() => ({
     leftBtn,
     righBtn,
+    searchTerm,
+
     setLeftBtn,
     setRightBtn,
-    setIsScrollHidden
+    setIsScrollHidden,
+    setSearchTerm
   }), [
     leftBtn,
-    righBtn
+    righBtn,
+    searchTerm
   ]);
 
   return <SystemContext.Provider value={value}>
