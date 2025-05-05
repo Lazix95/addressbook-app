@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { getAddressbookEntriesApi, postAddressbookEntriesApi, putAddressbookEntriesApi } from "../../api/addressbookApi";
+import { deleteAddressbookEntriesApi, getAddressbookEntriesApi, postAddressbookEntriesApi, putAddressbookEntriesApi } from "../../api/addressbookApi";
 
 export function useAddressbookApi() {
   const [entries, setEntires] = useState(null);
@@ -23,11 +23,18 @@ export function useAddressbookApi() {
       })
     });
   }
+  async function deleteEntry(entry) {
+    const data = await deleteAddressbookEntriesApi(entry.uuid);
+    setEntires((oldEntries) => {
+      return oldEntries.filter((oldEntry) => oldEntry.uuid !== entry.uuid);
+    });
+  }
 
   return {
     entries,
     getEntries,
     addNewEntry,
-    editEntry
+    editEntry,
+    deleteEntry
     }
 }

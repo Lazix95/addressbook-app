@@ -19,3 +19,7 @@ export async function putAddressbookEntriesApi(uuid, payload) {
   const response = await http.put(`/entries/${uuid}`, payload);
   return response.data;
 }
+export async function deleteAddressbookEntriesApi(uuid) {
+  const response = await http.delete(`/entries/${uuid}`);
+  return response.data;
+}
